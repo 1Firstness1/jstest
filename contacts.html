@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты - Веб-Студия "Астра"</title>
-    <meta name="description" content="Как с нами связаться. Наши контакты, адрес и форма обратной связи.">
+    <link rel="stylesheet" href="styles.css">
+    <title>Главная - Название вашего сайта</title>
+    <meta name="contacts" content="Все наши контакты">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
 <header>
-    <a href="/">Веб-Студия "Астра"</a>
+    <a href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
             <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
-    </nav>
+    </nav> <!-- Скопируйте весь блок <header> из index.html -->
 </header>
-
 <main>
+    <!-- Простые "хлебные крошки" -->
     <nav aria-label="Хлебные крошки">
-        <a href="index.html">Главная</a> - <span>Контакты</span>
+        <a href="index.html">Главная</a> →
+        <span>Контакты</span>
     </nav>
-
-    <h1>Наши контакты</h1>
-
+    <h1>Контакты</h1>
+    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+    <script defer>
+        const KEY='theme', btn=document.querySelector('.theme-toggle');
+        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        // Автовыбор: системная тема или сохранённый выбор пользователя
+        if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+            prefersDark)){
+            document.body.classList.add('theme-dark');
+            btn?.setAttribute('aria-pressed','true');
+        }
+        // Переключение по кнопке с сохранением в localStorage
+        btn?.addEventListener('click', ()=>{
+            const isDark=document.body.classList.toggle('theme-dark');
+            btn.setAttribute('aria-pressed', String(isDark));
+            localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+        });
+    </script>
     <section>
-        <h2>Адрес</h2>
-        <p>г. Москва, ул. Примерная, д. 123, офис 456</p>
+        <h2>Тех поддержка</h2>
+        <p>номер телефона поддержки...</p>
     </section>
-
     <section>
-        <h2>Телефоны</h2>
-        <p>+7 (999) 123-45-67 (отдел продаж)</p>
-        <p>+7 (495) 765-43-21 (техподдержка)</p>
-    </section>
-
-    <section>
-        <h2>Email</h2>
-        <p>info@astra-studio.ru - общие вопросы</p>
-        <p>support@astra-studio.ru - поддержка</p>
+        <h2>Партнеры</h2>
+        <p>Партнер1...</p>
+        <p>Партнер2...</p>
+        <p>Партнер3...</p>
     </section>
 </main>
-
 <footer>
-    <p>&copy; 2023 Веб-Студия "Астра". Все права защищены.</p>
-    <p>Телефон: +7 (495) 123-45-67</p>
+    <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+    <p>Телефон: +7 (123) 456-78-90</p> <!-- Скопируйте весь блок <footer> из index.html -->
 </footer>
 </body>
+
 </html>

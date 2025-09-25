@@ -1,161 +1,154 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - Моя веб-студия</title>
-    <meta name="description" content="Профессиональная разработка сайтов. Создание современных и быстрых веб-приложений.">
     <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Название вашего сайта</title>
+    <meta name="description" content="Краткое описание главной страницы вашего сайта">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <script src="main.js" defer></script>
 </head>
+
 <body>
-<header>
-    <a href="index.html">Моя веб-студия</a>
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
+<!-- Шапка сайта -->
+<header class="site-header">
+    <a class="site-header__brand" href="/">Лого</a>
+    <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+            <li class="site-nav__item">
+                <a class="site-nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="site-nav__item">
+                <a class="site-nav__link" href="about.html">О нас</a>
+            </li>
+            <li class="site-nav__item">
+                <a class="site-nav__link site-nav__link--cta" href="#contacts">Связаться</a>
+            </li>
         </ul>
     </nav>
 </header>
+
+<!-- Уникальное основное содержимое страницы -->
 <main>
-    <h1>Добро пожаловать на наш сайт!</h1>
+    <!-- Герой-секция из первой версии -->
     <section class="hero">
-        <h2 class="hero__title">Создаём цифровое будущее</h2>
-        <p class="hero__text">Профессиональная разработка сайтов и приложений</p>
+        <h1>Добро пожаловать!</h1>
+        <p>Это сайт с формой</p>
     </section>
+
+    <!-- Переключатель темы -->
+    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+
+    <!-- Кнопка открытия модалки -->
+    <button class="open-dialog" type="button">Написать нам</button>
+
+    <!-- Секция 1 с якорем -->
     <section id="services">
         <h2>Наши услуги</h2>
-        <p>Мы предлагаем полный цикл веб-разработки.</p>
-        <a href="#contacts">Связаться с нами</a>
+        <p>Описание предоставляемых услуг...</p>
+        <a href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
     </section>
+
+    <!-- Секция с изображением -->
+    <section>
+        <img
+                src="img/card-640.jpg"
+                srcset="img/card-640.jpg 640w, img/card-960.jpg 960w, img/card-1280.jpg 1280w"
+                sizes="(max-width: 700px) 92vw, (max-width: 1200px) 640px, 960px"
+                alt="Проект: макет мобильного приложения"
+                loading="lazy">
+    </section>
+
+    <!-- Секция 2 с якорем и видео -->
     <section id="portfolio">
-        <h2>Наши работы</h2>
-        <div class="portfolio">
-            <div class="portfolio-item">
-                <img
-                        src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
-                        alt="Веб-сайт"
-                        class="portfolio-image"
-                        width="300"
-                        height="150"
-                >
-                <h3>Корпоративный сайт</h3>
-                <p>Разработка полного цикла</p>
-            </div>
-
-            <div class="portfolio-item">
-                <img
-                        src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
-                        alt="Магазин"
-                        class="portfolio-image"
-                        width="300"
-                        height="150"
-                >
-                <h3>Интернет-магазин</h3>
-                <p>Электронная коммерция</p>
-            </div>
+        <h2>Портфолио</h2>
+        <p>Примеры наших работ...</p>
+        <!-- Вставка с Rutube -->
+        <div class="media">
+            <iframe
+                    src="https://rutube.ru/play/embed/38baa5503e18f7c0cd4318fe0084df1f"
+                    title="Видео о проекте"
+                    allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen loading="lazy">
+            </iframe>
         </div>
     </section>
-    <!-- Немного про нас с видео -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section__title" style="text-align: left; margin-left: 20px;">Немного про нас</h2>
-            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
-                <!-- Видео -->
-                <div class="video-container" style="height: 300px;">
-                    <iframe
-                            class="video-iframe"
-                            src="https://rutube.ru/play/embed/f420122afb212cb1f363da866004ccbd/"
-                            title="О нашей веб-студии"
-                            allowfullscreen
-                            style="width: 100%; height: 100%; border-radius: 12px;"
-                    ></iframe>
-                </div>
 
-                <!-- Рандомное фото -->
-                <div class="about-image">
-                    <img
-                            src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                            alt="Наш офис"
-                            style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px;"
-                            width="400"
-                            height="300"
-                    >
-                    <p style="text-align: center; margin-top: 10px; color: var(--color-muted);">
-                    </p>
-                </div>
-            </div>
-
-            <p style="text-align: center; margin-top: var(--space-3); color: var(--color-muted);">
-            </p>
-        </div>
-    </section>
-    <p style="text-align: center; margin-top: var(--space-3); color: var(--color-muted);">
-    </p>
-    <section class="services-preview">
-        <h2 class="services-preview__title">Наши услуги</h2>
-        <p class="services-preview__text">Полный цикл разработки: от идеи до запуска</p>
-        <a href="#services" class="services-preview__cta">Смотреть все услуги</a>
-    </section>
+    <!-- Секция 3 с якорем -->
     <section id="contacts">
-        <h2>Контакты</h2>
-        <p>Напишите или позвоните нам.</p>
-        <button id="openDialog" type="button">Написать нам</button>
-        <a href="contacts.html">Подробнее</a>
+        <h2>Контактная информация</h2>
+        <p>Наши контакты...</p>
+        <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
     </section>
 </main>
-<footer>
-    <p>&copy; 2023 Моя веб-студия. Все права защищены.</p>
-</footer>
-<dialog id="contactDialog" aria-labelledby="dialogTitle">
+
+<!-- Модалка с формой -->
+<dialog class="contact-dialog" aria-labelledby="dialogTitle">
     <h2 id="dialogTitle">Обратная связь</h2>
-    <form id="contactForm" method="dialog" novalidate>
-        <label for="name">Имя *</label>
+    <form class="contact-form" method="dialog" novalidate>
+        <label for="name">Имя</label>
         <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
-        <label for="email">E-mail *</label>
+
+        <label for="email">E-mail</label>
         <input id="email" name="email" type="email" required autocomplete="email">
-        <label for="phone">Телефон *</label>
-        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-               aria-describedby="phoneHelp" placeholder="+7 (900) 000-00-00"
-               required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+
+        <label for="phone">Телефон</label>
+        <input class="phone-input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp"
+               placeholder="+7 (___) ___-__-__" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
         <small id="phoneHelp">Формат: +7 (900) 000-00-00</small>
-        <label for="date">Дата обращения</label>
+
+        <label for="date">Дата</label>
         <input id="date" name="date" type="date">
-        <label for="topic">Тема *</label>
+
+        <label for="topic">Тема</label>
         <select id="topic" name="topic" required>
             <option value="">Выберите тему</option>
-            <option value="question">Вопрос</option>
-            <option value="order">Заказ</option>
-            <option value="other">Другое</option>
+            <option>Вопрос</option>
+            <option>Заказ</option>
         </select>
-        <label for="message">Сообщение *</label>
+
+        <label for="message">Сообщение</label>
         <textarea id="message" name="message" rows="4" required></textarea>
+
         <div class="form-actions">
-            <button type="button" id="closeDialog">Закрыть</button>
+            <button type="button" class="close-dialog">Закрыть</button>
             <button type="submit">Отправить</button>
         </div>
     </form>
 </dialog>
-<script src="main.js" defer></script>
-<button class="theme-switch" onclick="toggleTheme()">сменить тему</button>
 
+<!-- Подвал сайта -->
+<footer>
+    <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+    <p>Телефон: +7 (123) 456-78-90</p>
+</footer>
+
+<!-- JavaScript для темы и модального окна -->
 <script>
-    function toggleTheme() {
-        const html = document.documentElement;
-        const currentTheme = html.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
 
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+    // Автовыбор: системная тема или сохранённый выбор пользователя
+    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+        document.body.classList.add('theme-dark');
+        btn?.setAttribute('aria-pressed', 'true');
     }
 
-    // Загрузка сохраненной темы при запуске
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    }
+    // Переключение по кнопке с сохранением в localStorage
+    btn?.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        btn.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+    });
+
+    // Управление модальным окном
+    const dialog = document.querySelector('.contact-dialog');
+    const openBtn = document.querySelector('.open-dialog');
+    const closeBtn = document.querySelector('.close-dialog');
+    openBtn?.addEventListener('click', () => dialog?.showModal());
+    closeBtn?.addEventListener('click', () => dialog?.close());
 </script>
-
 </body>
+
 </html>

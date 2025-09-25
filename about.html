@@ -1,54 +1,125 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О нас - Веб-Студия "Астра"</title>
-    <meta name="description" content="Узнайте больше о нашей компании и истории. Наши ценности и команда профессионалов.">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> <!-- Скопируйте весь блок <head> из index.html -->
+    <title>О нас - Название вашего сайта</title>
+    <meta name="description" content="Узнайте больше о нашей компании и истории">
 </head>
+
 <body>
 <header>
-    <a href="/">Веб-Студия "Астра"</a>
+    <a href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
             <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
-    </nav>
+    </nav> <!-- Скопируйте весь блок <header> из index.html -->
 </header>
 <main>
+    <!-- Простые "хлебные крошки" -->
     <nav aria-label="Хлебные крошки">
-        <a href="index.html">Главная</a> - <span>О нас</span>
+        <a href="index.html">Главная</a> →
+        <span>О нас</span>
     </nav>
-
     <h1>О нашей компании</h1>
+    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+    <script defer>
+        const KEY='theme', btn=document.querySelector('.theme-toggle');
+        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        // Автовыбор: системная тема или сохранённый выбор пользователя
+        if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+            prefersDark)){
+            document.body.classList.add('theme-dark');
+            btn?.setAttribute('aria-pressed','true');
+        }
+        // Переключение по кнопке с сохранением в localStorage
+        btn?.addEventListener('click', ()=>{
+            const isDark=document.body.classList.toggle('theme-dark');
+            btn.setAttribute('aria-pressed', String(isDark));
+            localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+        });
+    </script>
     <section>
         <h2>Наша история</h2>
-        <p>началась в сентябре 2025 года и пока активно пишется</p>
+        <p>Текст о том, как все начиналось...</p>
     </section>
-
     <section>
         <h2>Наша команда</h2>
-        <p>Над вашими проектами работает пока только один человек</p>
-    </section>
-    <!-- Видео секция -->
-    <section class="section">
-        <h2>Видео о нашей компании</h2>
-        <div class="video">
-            <iframe
-                    class="video__iframe"
-                    src="https://rutube.ru/play/embed/da5cdc514f9d1e54498eb3c5d66f83d5/"
-                    title="Видео о нашей компании"
-                    allowfullscreen
-            ></iframe>
-        </div>
+        <p>Текст о команде...</p>
     </section>
 </main>
 <footer>
-    <p>&copy; 2025 Веб-Студия "Астра".</p>
-    <p>Телефон: +7 (495) 123-45-67</p>
+    <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+    <p>Телефон: +7 (123) 456-78-90</p> <!-- Скопируйте весь блок <footer> из index.html -->
 </footer>
 </body>
+
+</html><!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> <!-- Скопируйте весь блок <head> из index.html -->
+    <title>О нас - Название вашего сайта</title>
+    <meta name="description" content="Узнайте больше о нашей компании и истории">
+</head>
+
+<body>
+<header>
+    <a href="/">Логотип или название сайта</a>
+    <!-- Главное меню навигации -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav> <!-- Скопируйте весь блок <header> из index.html -->
+</header>
+<main>
+    <!-- Простые "хлебные крошки" -->
+    <nav aria-label="Хлебные крошки">
+        <a href="index.html">Главная</a> →
+        <span>О нас</span>
+    </nav>
+    <h1>О нашей компании</h1>
+    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+    <script defer>
+        const KEY='theme', btn=document.querySelector('.theme-toggle');
+        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        // Автовыбор: системная тема или сохранённый выбор пользователя
+        if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+            prefersDark)){
+            document.body.classList.add('theme-dark');
+            btn?.setAttribute('aria-pressed','true');
+        }
+        // Переключение по кнопке с сохранением в localStorage
+        btn?.addEventListener('click', ()=>{
+            const isDark=document.body.classList.toggle('theme-dark');
+            btn.setAttribute('aria-pressed', String(isDark));
+            localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+        });
+    </script>
+    <section>
+        <h2>Наша история</h2>
+        <p>Текст о том, как все начиналось...</p>
+    </section>
+    <section>
+        <h2>Наша команда</h2>
+        <p>Текст о команде...</p>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+    <p>Телефон: +7 (123) 456-78-90</p> <!-- Скопируйте весь блок <footer> из index.html -->
+</footer>
+</body>
+
 </html>
