@@ -4,23 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <title>Главная - Название вашего сайта</title>
-    <meta name="contacts" content="Все наши контакты">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Название вашего сайта</title>
+    <meta name="description" content="Все наши контакты">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <script src="main.js" defer></script>
 </head>
 
 <body>
-<header>
-    <a href="/">Логотип или название сайта</a>
-    <!-- Главное меню навигации -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
+<!-- Шапка сайта -->
+<header class="site-header">
+    <a class="site-header__brand" href="/">Лого</a>
+    <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+            <li class="site-nav__item">
+                <a class="site-nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="site-nav__item">
+                <a class="site-nav__link" href="about.html">О нас</a>
+            </li>
+            <li class="site-nav__item">
+                <a class="site-nav__link" href="contacts.html">Контакты</a>
+            </li>
         </ul>
-    </nav> <!-- Скопируйте весь блок <header> из index.html -->
+    </nav>
 </header>
+
 <main>
     <!-- Простые "хлебные крошки" -->
     <nav aria-label="Хлебные крошки">
@@ -29,22 +38,7 @@
     </nav>
     <h1>Контакты</h1>
     <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
-    <script defer>
-        const KEY='theme', btn=document.querySelector('.theme-toggle');
-        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
-        // Автовыбор: системная тема или сохранённый выбор пользователя
-        if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
-            prefersDark)){
-            document.body.classList.add('theme-dark');
-            btn?.setAttribute('aria-pressed','true');
-        }
-        // Переключение по кнопке с сохранением в localStorage
-        btn?.addEventListener('click', ()=>{
-            const isDark=document.body.classList.toggle('theme-dark');
-            btn.setAttribute('aria-pressed', String(isDark));
-            localStorage.setItem(KEY, isDark ? 'dark' : 'light');
-        });
-    </script>
+
     <section>
         <h2>Тех поддержка</h2>
         <p>номер телефона поддержки...</p>
@@ -56,10 +50,31 @@
         <p>Партнер3...</p>
     </section>
 </main>
+
+<!-- Подвал сайта -->
 <footer>
     <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
-    <p>Телефон: +7 (123) 456-78-90</p> <!-- Скопируйте весь блок <footer> из index.html -->
+    <p>Телефон: +7 (123) 456-78-90</p>
 </footer>
+
+<!-- JavaScript для темы -->
+<script>
+    const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Автовыбор: системная тема или сохранённый выбор пользователя
+    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
+        document.body.classList.add('theme-dark');
+        btn?.setAttribute('aria-pressed', 'true');
+    }
+
+    // Переключение по кнопке с сохранением в localStorage
+    btn?.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        btn.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+    });
+</script>
 </body>
 
 </html>
