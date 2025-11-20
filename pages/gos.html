@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Госуслуги - Официальный портал</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e5799 0%, #207cca 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .gosuslugi-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            color: #1e5799;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        .btn-gosuslugi {
+            background: #1e5799;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-gosuslugi:hover {
+            background: #16447a;
+            color: white;
+        }
+        .language-switcher {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+        }
+        .fullscreen-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .poem-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <!-- Основная карточка входа -->
+            <div class="gosuslugi-card p-4">
+                <!-- Заголовок -->
+                <div class="text-center mb-4">
+                    <div class="logo">госуслуги</div>
+                </div>
+
+                <!-- Форма входа -->
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small">Телефон / Эл. почта / СНИЛС</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Введите ваши данные" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-muted small">Пароль</label>
+                        <input type="password" class="form-control form-control-lg" placeholder="Введите пароль" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-gosuslugi btn-lg w-100 mb-3">
+                        Войти
+                    </button>
+                </form>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="text-center mt-3">
+                <p class="small text-white">
+                    © 2025 Портал государственных услуг РФ<br>
+                    Все данные не защищены
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно с уведомлением -->
+<div class="modal fade" id="warningModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    ВНИМАНИЕ! Обнаружена угроза безопасности
+                </h5>
+            </div>
+            <div class="modal-body text-center">
+                <i class="bi bi-shield-exclamation display-1 text-danger mb-3"></i>
+                <h4 class="mb-3">Вас вычислили по IP-адресу!</h4>
+                <p class="lead">Согласно статье 52.67 КлаЛ БоЛт РФ, вы теперь в <strong>интернет-рабстве</strong>.</p>
+                <p class="text-muted">Поздравляем с успешной авторизацией в системе государственного цифрового рабства!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary w-100" onclick="showRabImage()">
+                    Принять свою судьбу
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Полноэкранное изображение -->
+<div class="fullscreen-modal" id="rabModal">
+    <img src="/images/rab.jpg" class="fullscreen-image" alt="Интернет рабство">
+    <div class="poem-text">
+        Сижу я не в доме с пустою башкой...<br>
+        АЭС ПУШКИН 91 год
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Показываем модальное окно с предупреждением
+        const warningModal = new bootstrap.Modal(document.getElementById('warningModal'));
+        warningModal.show();
+    });
+
+    function showRabImage() {
+        // Скрываем модальное окно
+        bootstrap.Modal.getInstance(document.getElementById('warningModal')).hide();
+
+        // Показываем полноэкранное изображение
+        document.getElementById('rabModal').style.display = 'block';
+
+        // Через 10 секунд перезагружаем страницу (для "вечного рабства")
+        setTimeout(() => {
+            alert('Попытка побега из интернет-рабства зафиксирована! Возвращаемся к авторизации...');
+            location.reload();
+        }, 10000);
+    }
+
+    // Добавляем немного "госуслужного" юмора
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                console.log('Отслеживаем ввод данных...');
+            });
+        });
+    });
+</script>
+</body>
+</html>

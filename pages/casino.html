@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Казино "Лопата"</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
+        .casino-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+        }
+        .balance-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .btn-gold {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            color: black;
+            font-weight: bold;
+        }
+        .btn-gold:hover {
+            background: linear-gradient(45deg, #ffed4e, #ffd700);
+            color: black;
+        }
+        .choice-btn {
+            width: 100px;
+            height: 100px;
+            font-size: 3rem;
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        .choice-btn:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: scale(1.1);
+        }
+        .game-result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .win {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+        .lose {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+        }
+        /* Fallback если изображение не загрузится */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b00 100%);
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div class="container my-auto">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-warning">
+            <i class="bi bi-coin"></i>
+            КАЗИНО ОНЛАЙН
+        </h1>
+        <p class="lead text-white-50">ВСЁ ЧТО СКАМИТ ДЕЛАЕТ ВАС БЕДНЕЕ!</p>
+        <p class="lead text-white-50">А мы гребём деньги лопатой!</p>
+    </div>
+
+    <!-- Основная карточка казино -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="casino-card p-4 shadow-lg">
+                <!-- Баланс -->
+                <div class="text-center mb-4">
+                    <h3 class="text-white-50">Ваш баланс:</h3>
+                    <div class="balance-display" id="balance">0₽</div>
+                    <button class="btn btn-gold btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#depositModal">
+                        <i class="bi bi-plus-circle"></i> Пополнить баланс
+                    </button>
+                </div>
+
+                <hr class="border-warning">
+
+                <!-- Игра -->
+                <div class="text-center">
+                    <h4 class="text-warning mb-4">
+                        <i class="bi bi-dice-5"></i> Игра: Камень-Ножницы-Бумага
+                    </h4>
+
+                    <!-- Ставка -->
+                    <div class="mb-4">
+                        <label class="form-label text-white">Ваша ставка:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="betAmount" value="100" min="100" max="10000" step="50">
+                            <span class="input-group-text bg-warning">₽</span>
+                        </div>
+                        <div class="form-text text-white-50">
+                            Минимум: 100₽ | Максимум: 10 000₽
+                        </div>
+                    </div>
+
+                    <!-- Выбор игрока -->
+                    <div class="mb-4">
+                        <label class="form-label text-white">Ваш выбор:</label>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="choice-btn" onclick="playGame('rock')">✊</button>
+                            <button class="choice-btn" onclick="playGame('scissors')">✌️</button>
+                            <button class="choice-btn" onclick="playGame('paper')">✋</button>
+                        </div>
+                    </div>
+
+                    <!-- Результат -->
+                    <div id="gameResult" class="game-result" style="display: none;"></div>
+
+                    <!-- Правила -->
+                    <div class="mt-4 p-3 bg-dark rounded">
+                        <h6 class="text-warning">📜 Правила скама:</h6>
+                        <ul class="list-unstyled text-white-50 small">
+                            <li>При выигрыше: ставка удваивается!</li>
+                            <li>При проигрыше: деньги сгорают как цыгане в мангале!</li>
+                            <li>При ничье: ставка временно возвращается к вам!</li>
+                            <li>Шанс выигрыша примерно как у мухи увернуться от тапка!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно пополнения -->
+<div class="modal fade" id="depositModal" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-warning">
+                <h5 class="modal-title text-warning" id="depositModalLabel">
+                    <i class="bi bi-credit-card"></i> Пополнение баланса
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="depositForm">
+                    <div class="mb-3">
+                        <label class="form-label">Номер карты:</label>
+                        <input type="text" class="form-control bg-secondary text-white" value="2200 1234 5678 9012" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Срок действия:</label>
+                        <input type="text" class="form-control bg-secondary text-white" value="12/25" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">CVV:</label>
+                        <input type="text" class="form-control bg-secondary text-white" value="123" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Сумма пополнения:</label>
+                        <input type="number" class="form-control" id="depositAmount" value="1000" min="100" required>
+                    </div>
+                </form>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> Все данные уже заполнены! Мы заботимся о вашем удобстве
+                </div>
+            </div>
+            <div class="modal-footer border-warning">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-gold" onclick="processDeposit()">
+                    <i class="bi bi-check-lg"></i> Пополнить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast уведомление -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="creditToast" class="toast bg-warning text-dark" role="alert">
+        <div class="toast-header">
+            <strong class="me-auto"><i class="bi bi-cash-coin"></i> Кредитный отдел</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            <strong>Поздравляем!</strong> Вам одобрен кредит на <span id="creditAmount">1000</span>₽ под 1000% годовых! 🎉
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let balance = 0;
+    let creditToast = null;
+
+    // Инициализация toast при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        creditToast = new bootstrap.Toast(document.getElementById('creditToast'));
+    });
+
+    function processDeposit() {
+        const depositAmount = parseInt(document.getElementById('depositAmount').value);
+
+        if (depositAmount < 100) {
+            alert('Минимальная сумма пополнения - 100₽!');
+            return;
+        }
+
+        // Пополняем баланс
+        balance += depositAmount;
+        updateBalance();
+
+        // Показываем уведомление о кредите
+        document.getElementById('creditAmount').textContent = depositAmount.toLocaleString();
+        creditToast.show();
+
+        // Закрываем модальное окно
+        bootstrap.Modal.getInstance(document.getElementById('depositModal')).hide();
+
+        // "Случайное" сообщение
+        const messages = [
+            "Деньги уже на вашем счету и в нашем кармане!",
+            "Баланс пополнен! Теперь можете их проиграть!",
+            "Ура! Новые деньги для азартных игр!"
+        ];
+        alert(messages[Math.floor(Math.random() * messages.length)]);
+    }
+
+    function playGame(playerChoice) {
+        const betAmount = parseInt(document.getElementById('betAmount').value);
+        const resultDiv = document.getElementById('gameResult');
+
+        // Проверки
+        if (betAmount < 100 || betAmount > 10000) {
+            alert('Ставка должна быть от 100 до 10 000₽!');
+            return;
+        }
+
+        if (betAmount > balance) {
+            alert('Недостаточно средств! Пополните баланс.');
+            return;
+        }
+
+        // Компьютер ВСЕГДА побеждает
+        let computerChoice;
+        let result;
+
+        if (playerChoice === 'rock') {
+            computerChoice = 'paper'; // Бумага бьет камень
+            result = 'lose';
+        } else if (playerChoice === 'scissors') {
+            computerChoice = 'rock'; // Камень бьет ножницы
+            result = 'lose';
+        } else if (playerChoice === 'paper') {
+            computerChoice = 'scissors'; // Ножницы бьют бумагу
+            result = 'lose';
+        }
+
+        // Обновляем баланс
+        balance -= betAmount;
+        updateBalance();
+
+        // Показываем результат
+        const choiceEmoji = {
+            'rock': '✊',
+            'scissors': '✌️',
+            'paper': '✋'
+        };
+
+        resultDiv.innerHTML = `
+                <div class="lose">
+                    <i class="bi bi-emoji-frown"></i> Вы проиграли!
+                </div>
+                <div class="small text-white-50 mt-2">
+                    Вы: ${choiceEmoji[playerChoice]} vs Казино: ${choiceEmoji[computerChoice]}<br>
+                    Потеряно: ${betAmount}₽<br>
+                    <em>Честно повезёт в следующий раз!</em>
+                </div>
+            `;
+        resultDiv.style.display = 'block';
+    }
+
+    function updateBalance() {
+        document.getElementById('balance').textContent = balance.toLocaleString() + ' ₽';
+    }
+
+    function changeBet(amount) {
+        const betInput = document.getElementById('betAmount');
+        let currentBet = parseInt(betInput.value);
+        let newBet = currentBet + amount;
+
+        // Проверяем границы
+        if (newBet < 100) newBet = 100;
+        if (newBet > 10000) newBet = 10000;
+
+        betInput.value = newBet;
+    }
+</script>
+</body>
+</html>
